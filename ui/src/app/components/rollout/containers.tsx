@@ -109,12 +109,14 @@ const ContainerWidget = (props: {container: RolloutContainerInfo; images: ImageI
     };
 
     return (
-        <div style={{margin: '1em 0', whiteSpace: 'nowrap'}}>
+        <div style={{margin: '1em 0', whiteSpace: editing ? 'normal' : 'nowrap'}}>
             <div style={{marginBottom: '0.5em', fontWeight: 600, fontSize: '14px'}}>{container.name}</div>
-            <div style={{width: '100%', height: '2em', minWidth: 0}}>
+            <div style={{width: '100%', height: editing ? 'auto' : '2em', minWidth: 0}}>
                 {!editing ? (
                     <Tooltip title={container.image} placement="topLeft" overlayStyle={{maxWidth: '600px', wordBreak: 'break-all'}}>
-                        <Input value={container.image} style={{width: '100%', cursor: 'default', color: 'black'}} disabled={true} />
+                        <div style={{width: '100%'}}>
+                            <Input value={container.image} style={{width: '100%', cursor: 'default', color: 'black'}} disabled={true} />
+                        </div>
                     </Tooltip>
                 ) : (
                     <AutoComplete
@@ -127,6 +129,8 @@ const ContainerWidget = (props: {container: RolloutContainerInfo; images: ImageI
                         value={input}
                         onSelect={update}
                         onChange={update}
+                        autoFocus={true}
+                        dropdownMatchSelectWidth={false}
                     />
                 )}
             </div>
