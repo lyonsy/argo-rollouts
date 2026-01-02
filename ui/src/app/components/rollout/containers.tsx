@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {RolloutContainerInfo} from '../../../models/rollout/generated';
 import {ImageInfo, ReactStatePair} from './rollout';
-import {AutoComplete, Button, Input} from 'antd';
+import {AutoComplete, Button, Input, Tooltip} from 'antd';
 import {ConfirmButton} from '../confirm-button/confirm-button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faExclamationCircle, faPencilAlt, faSave, faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -113,7 +113,9 @@ const ContainerWidget = (props: {container: RolloutContainerInfo; images: ImageI
             <div style={{marginBottom: '0.5em', fontWeight: 600, fontSize: '14px'}}>{container.name}</div>
             <div style={{width: '100%', height: '2em', minWidth: 0}}>
                 {!editing ? (
-                    <Input value={container.image} style={{width: '100%', cursor: 'default', color: 'black'}} disabled={true} />
+                    <Tooltip title={container.image} placement="topLeft" overlayStyle={{maxWidth: '600px', wordBreak: 'break-all'}}>
+                        <Input value={container.image} style={{width: '100%', cursor: 'default', color: 'black'}} disabled={true} />
+                    </Tooltip>
                 ) : (
                     <AutoComplete
                         allowClear={true}
